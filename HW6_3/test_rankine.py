@@ -1,3 +1,12 @@
+#Champ Cain
+#MAE 3403
+#HW6 part 3
+
+# I used AI to help once again with the integration from .txt documents
+# I also was unsure if I was supposed to make a graph or not of the outputs. My attmepts at doing so
+# were not looking very good unfortunately.
+
+
 from rankine import rankine
 
 def main():

@@ -3,8 +3,12 @@
 #HW6 part 2
 
 # I am running into a runtime warning with the 'fsolve' function. I instituted a few recommended fixes
-# from AI but I still seem to ge the same warning. However, the results for the flows themselves seem to check out
+# from AI but I still seem to get the same warning. However, the results for the flows themselves seem to check out
 # unfortunately due to time constraints I am not able to decipher more of this problem into run time.
+# the headloss is the only thing I couldnt get figured out. I started over twice and still wound up
+# with the same results. Shoot, even AI was getting a reasonable answer, but as soon as I plugged it into here
+# it just gives me these off the wall headloss figures. I am wondering if it has something to do with unit
+# conversion and division is off my a couple orders of magnitude
 
 # region imports
 from Pipe import Pipe
