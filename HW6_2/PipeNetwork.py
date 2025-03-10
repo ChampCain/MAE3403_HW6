@@ -106,14 +106,14 @@ class PipeNetwork():
 
     def printPipeFlowRates(self):
         for p in self.pipes:
-            p.printPipeFlowRate()
+            print(f'The flow in segment {p.Name()} is {p.Q:.2f} L/s')
 
     def printNetNodeFlows(self):
         for n in self.nodes:
-            print('net flow into node {} is {:0.2f}'.format(n.name, n.getNetFlowRate()))
+            print(f'Net flow into node {n.name} is {n.getNetFlowRate():.2f} L/s')
 
     def printLoopHeadLoss(self):
         for l in self.loops:
-            print('head loss for loop {} is {:0.2f}'.format(l.name, l.getLoopHeadLoss()))
+            print(f'Head loss for loop {l.name} is {l.getLoopHeadLoss():.2f} m')
     #endregion
 # endregion

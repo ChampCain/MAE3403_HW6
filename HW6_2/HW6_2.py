@@ -39,17 +39,17 @@ def main():
 
     #instantiate a new PipeNetwork object
     PN = PipeNetwork(fluid=water)
-    #add Pipe objects to the pipe network (see constructor for Pipe class)
-    PN.pipes.append(Pipe('a','b',250, 300, roughness, water))
-    PN.pipes.append(Pipe('a','c',100, 200, roughness, water))
-    PN.pipes.append(Pipe('b','e',100, 200, roughness, water))
-    PN.pipes.append(Pipe('c','d',125, 200, roughness, water))
-    PN.pipes.append(Pipe('c','f',100, 150, roughness, water))
-    PN.pipes.append(Pipe('d','e',125, 200, roughness, water))
-    PN.pipes.append(Pipe('d','g',100, 150, roughness, water))
-    PN.pipes.append(Pipe('e','h',100, 150, roughness, water))
-    PN.pipes.append(Pipe('f','g',125, 250, roughness, water))
-    PN.pipes.append(Pipe('g','h',125, 250, roughness, water))
+    # Update the pipe lengths to be in meters (divide by 1000)
+    PN.pipes.append(Pipe('a', 'b', 250, 300 / 1000, roughness, water))  # 250m
+    PN.pipes.append(Pipe('a', 'c', 100, 200 / 1000, roughness, water))  # 100m
+    PN.pipes.append(Pipe('b', 'e', 100, 200 / 1000, roughness, water))  # 100m
+    PN.pipes.append(Pipe('c', 'd', 125, 200 / 1000, roughness, water))  # 125m
+    PN.pipes.append(Pipe('c', 'f', 100, 150 / 1000, roughness, water))  # 100m
+    PN.pipes.append(Pipe('d', 'e', 125, 200 / 1000, roughness, water))  # 125m
+    PN.pipes.append(Pipe('d', 'g', 100, 150 / 1000, roughness, water))  # 100m
+    PN.pipes.append(Pipe('e', 'h', 100, 150 / 1000, roughness, water))  # 100m
+    PN.pipes.append(Pipe('f', 'g', 125, 250 / 1000, roughness, water))  # 125m
+    PN.pipes.append(Pipe('g', 'h', 125, 250 / 1000, roughness, water))  # 125m
     #add Node objects to the pipe network by calling buildNodes method of PN object
     PN.buildNodes()
 
