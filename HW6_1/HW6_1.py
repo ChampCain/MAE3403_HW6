@@ -1,3 +1,10 @@
+#Champ Cain
+#MAE3403
+#HW6 part 1
+
+#across HW6 part 1 I used AI mainly to help me implement pulling the data from the .txt files and inserting
+# it into the coded functions
+
 #region imports
 from ResistorNetwork import ResistorNetwork, ResistorNetwork_2
 #endregion

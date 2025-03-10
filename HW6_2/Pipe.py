@@ -8,7 +8,7 @@ from Fluid import Fluid
 # region class definitions
 class Pipe():
     #region constructor
-    def __init__(self, Start='A', End='B',L=100, D=200, r=0.00025, fluid=Fluid()):
+    def __init__(self, Start='A', End='B', L=100, D=200, r=0.00025, fluid=Fluid()):
         '''
         Defines a generic pipe with orientation from lowest letter to highest, alphabetically.
         :param Start: the start node (string)
@@ -20,19 +20,19 @@ class Pipe():
         '''
         #region attributes
         # from arguments given in constructor
-        self.startNode=min(Start,End) #makes sure to use the lowest letter for startNode
-        self.endNode=max(Start,End) #makes sure to use the highest letter for the endNode
-        self.length=L
-        self.r=r
-        self.fluid=fluid #the fluid in the pipe
+        self.startNode = min(Start, End)  # makes sure to use the lowest letter for startNode
+        self.endNode = max(Start, End)  # makes sure to use the highest letter for the endNode
+        self.length = L
+        self.r = r
+        self.fluid = fluid  # the fluid in the pipe
 
         # other calculated properties
-        self.d=D/1000.0 #diameter in m
-        self.relrough = self.r/self.d #calculate relative roughness for easy use later
-        self.A=math.pi/4.0*self.d**2 #calculate pipe cross sectional area for easy use later
-        self.Q=10 #working in units of L/s, just an initial guess
-        self.vel=self.V()  #calculate the initial velocity of the fluid
-        self.reynolds=self.Re() #calculate the initial reynolds number
+        self.d = D / 1000.0  # diameter in m
+        self.relrough = self.r / self.d  # calculate relative roughness for easy use later
+        self.A = math.pi / 4.0 * self.d ** 2  # calculate pipe cross sectional area for easy use later
+        self.Q = 10  # working in units of L/s, just an initial guess
+        self.vel = self.V()  # calculate the initial velocity of the fluid
+        self.reynolds = self.Re()  # calculate the initial reynolds number
         #endregion
     #endregion
 
@@ -40,9 +40,9 @@ class Pipe():
     def V(self):
         '''
         Calculate average velocity in the pipe for volumetric flow self.Q
-        :return:the average velocity in m/s
+        :return: the average velocity in m/s
         '''
-        self.vel= #$JES MISSING CODE$  # the average velocity is Q/A (be mindful of units)
+        self.vel = self.Q / self.A  # the average velocity is Q/A (be mindful of units)
         return self.vel
 
     def Re(self):
@@ -50,7 +50,7 @@ class Pipe():
         Calculate the reynolds number under current conditions.
         :return:
         '''
-        self.reynolds= #$JES MISSING CODE$ # Re=rho*V*d/mu, be sure to use V() so velocity is updated.
+        self.reynolds = self.fluid.rho * self.vel * self.d / self.fluid.mu  # Re=rho*V*d/mu, be sure to use V() so velocity is updated.
         return self.reynolds
 
     def FrictionFactor(self):
@@ -60,8 +60,8 @@ class Pipe():
         :return: the (Darcy) friction factor
         """
         # update the Reynolds number and make a local variable Re
-        Re=self.Re()
-        rr=self.relrough
+        Re = self.Re()
+        rr = self.relrough
         # to be used for turbulent flow
         def CB():
             # note:  in numpy log is for natural log.  log10 is log base 10.
@@ -83,7 +83,7 @@ class Pipe():
         Lamff = lam()
         # I assume laminar is more accurate when just above 2000 and CB more accurate when just below Re 4000.
         # I will weight the mean appropriately using a linear interpolation.
-        mean = Lamff+((Re-2000)/(4000-2000))*(CBff - Lamff)
+        mean = Lamff + ((Re - 2000) / (4000 - 2000)) * (CBff - Lamff)
         sig = 0.2 * mean
         # Now, use normalvariate to put some randomness in the choice
         return rnd.normalvariate(mean, sig)
@@ -94,7 +94,7 @@ class Pipe():
         '''
         g = 9.81  # m/s^2
         ff = self.FrictionFactor()
-        hl = #$JES MISSING CODE$ # calculate the head loss in m of water
+        hl = ff * (self.length / self.d) * (self.vel ** 2) / (2 * g)  # calculate the head loss in m of water
         return hl
 
     def getFlowHeadLoss(self, s):
@@ -103,25 +103,25 @@ class Pipe():
         :param s: the node i'm starting with in a traversal of the pipe
         :return: the signed headloss through the pipe in m of fluid
         '''
-        #while traversing a loop, if s = startNode I'm traversing in same direction as positive pipe
-        nTraverse= 1 if s==self.startNode else -1
-        #if flow is positive sense, scalar =1 else =-1
-        nFlow=1 if self.Q >= 0 else -1
-        return nTraverse*nFlow*self.frictionHeadLoss()
+        # while traversing a loop, if s = startNode I'm traversing in same direction as positive pipe
+        nTraverse = 1 if s == self.startNode else -1
+        # if flow is positive sense, scalar =1 else =-1
+        nFlow = 1 if self.Q >= 0 else -1
+        return nTraverse * nFlow * self.frictionHeadLoss()
 
     def Name(self):
         '''
         Gets the pipe name.
         :return:
         '''
-        return self.startNode+'-'+self.endNode
+        return self.startNode + '-' + self.endNode
 
     def oContainsNode(self, node):
-        #does the pipe connect to the node?
-        return self.startNode==node or self.endNode==node
+        # does the pipe connect to the node?
+        return self.startNode == node or self.endNode == node
 
     def printPipeFlowRate(self):
-        print('The flow in segment {} is {:0.2f} L/s'.format(self.Name(),self.Q))
+        print('The flow in segment {} is {:0.2f} L/s'.format(self.Name(), self.Q))
 
     def getFlowIntoNode(self, n):
         '''
@@ -129,7 +129,7 @@ class Pipe():
         :param n: a node object
         :return: +/-Q
         '''
-        if n==self.startNode:
+        if n == self.startNode:
             return -self.Q
         return self.Q
     #endregion

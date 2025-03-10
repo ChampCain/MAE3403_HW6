@@ -1,3 +1,7 @@
+#Champ Cain
+#MAE3403
+#HW6 part 1
+
 #region classes
 class Resistor():
     #region constructor

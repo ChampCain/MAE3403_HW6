@@ -1,6 +1,16 @@
+#Champ Cain
+#MAE 3403
+#HW6 part 2
+
+# I am running into a runtime warning with the 'fsolve' function. I instituted a few recommended fixes
+# from AI but I still seem to ge the same warning. However, the results for the flows themselves seem to check out
+# unfortunately due to time constraints I am not able to decipher more of this problem into run time.
+
 # region imports
 from Pipe import Pipe
 from Loop import Loop
+from PipeNetwork import PipeNetwork
+from Fluid import Fluid
 # endregion
 
 # region function definitions
@@ -20,11 +30,11 @@ def main():
     :return:
     '''
     #instantiate a Fluid object to define the working fluid as water
-    water= #$JES MISSING CODE$  #
+    water = Fluid()
     roughness = 0.00025  # in meters
 
     #instantiate a new PipeNetwork object
-    PN=#$JES MISSING CODE$  #
+    PN = PipeNetwork(fluid=water)
     #add Pipe objects to the pipe network (see constructor for Pipe class)
     PN.pipes.append(Pipe('a','b',250, 300, roughness, water))
     PN.pipes.append(Pipe('a','c',100, 200, roughness, water))
@@ -40,10 +50,10 @@ def main():
     PN.buildNodes()
 
     #update the external flow of certain nodes
-    PN.getNode('a').extFlow=60
-    PN.getNode('d').extFlow=-30
-    PN.getNode('f').extFlow=-15
-    PN.getNode('h').extFlow=-15
+    PN.getNode('a').extFlow = 60
+    PN.getNode('d').extFlow = -30
+    PN.getNode('f').extFlow = -15
+    PN.getNode('h').extFlow = -15
 
     #add Loop objects to the pipe network
     PN.loops.append(Loop('A',[PN.getPipe('a-b'), PN.getPipe('b-e'),PN.getPipe('d-e'), PN.getPipe('c-d'), PN.getPipe('a-c')]))
@@ -67,5 +77,4 @@ def main():
 # region function calls
 if __name__ == "__main__":
     main()
-# endregions
-
+# endregion

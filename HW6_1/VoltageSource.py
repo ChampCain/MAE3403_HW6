@@ -1,3 +1,7 @@
+#Champ Cain
+#MAE3403
+#HW6 part 1
+
 #region class definitions
 class VoltageSource():
     #region constructor

@@ -1,3 +1,7 @@
+#Champ Cain
+#MAE3403
+#HW6 part 1
+
 #region imports
 from scipy.optimize import fsolve
 from Resistor import Resistor
